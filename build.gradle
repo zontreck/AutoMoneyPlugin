@@ -8,7 +8,7 @@ plugins {
     id 'java'
 }
 
-group = "com.crimsonwarpedcraft.exampleplugin"
+group = "dev.zontreck.amp"
 
 static def getTime() {
     SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd-HHmm")

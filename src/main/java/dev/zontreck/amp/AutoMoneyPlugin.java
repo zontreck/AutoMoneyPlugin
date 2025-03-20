@@ -1,15 +1,15 @@
-package com.crimsonwarpedcraft.exampleplugin;
+package dev.zontreck.amp;
 
 import io.papermc.lib.PaperLib;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
 /**
- * Created by Levi Muniz on 7/29/20.
+ * AutoMoneyPlugin
  *
- * @author Copyright (c) Levi Muniz. All Rights Reserved.
+ * @author Copyright (c) zontreck. Licensed under the GPLv3.
  */
-public class ExamplePlugin extends JavaPlugin {
+public class AutoMoneyPlugin extends JavaPlugin {
 
   @Override
   public void onEnable() {
