@@ -61,6 +61,13 @@ repositories {
         }
     }
 
+    maven { url "https://ci.ender.zone/plugin/repository/everything/"}
+
+    maven {
+        url "https://hub.spigotmc.org/nexus/content/groups/public/"
+    }
+    maven { "https://repo.extendedclip.com/content/repositories/placeholderapi/"}
+
     mavenCentral()
 }
 
