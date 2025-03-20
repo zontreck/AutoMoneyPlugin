@@ -49,6 +49,7 @@ repositories {
             includeModule("io.papermc.paper", "paper-api")
             includeModule("io.papermc", "paperlib")
             includeModule("net.md-5", "bungeecord-chat")
+            includeModule("org.bukkit", "bukkit")
         }
     }
 
@@ -60,13 +61,6 @@ repositories {
             includeModule("com.mojang", "brigadier")
         }
     }
-
-    maven { url "https://ci.ender.zone/plugin/repository/everything/"}
-
-    maven {
-        url "https://hub.spigotmc.org/nexus/content/groups/public/"
-    }
-    maven { "https://repo.extendedclip.com/content/repositories/placeholderapi/"}
 
     mavenCentral()
 }
