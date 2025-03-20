@@ -15,7 +15,7 @@ pipeline {
                     #!/bin/bash
 
                     chmod +x gradlew
-                    ./gradlew clean build
+                    ./gradlew clean build release
                     '''
                 }
             }
