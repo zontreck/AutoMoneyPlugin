@@ -1,5 +1,0 @@
-# The amount of money to give out to online players
-amountToGive: 0.25
-
-# Give every <duration> seconds
-duration: 60
