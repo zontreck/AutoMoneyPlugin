@@ -3,3 +3,6 @@ amountToGive: 0.25
 
 # Give every <duration> seconds
 duration: 60
+
+# Bank account if applicable. Leave blank if undesired.
+bank: ""

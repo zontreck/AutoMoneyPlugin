@@ -2,6 +2,7 @@ package dev.zontreck.amp;
 
 import io.papermc.lib.PaperLib;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse.ResponseType;
 
 import java.util.Timer;
 
@@ -28,6 +29,7 @@ public class AutoMoneyPlugin extends JavaPlugin {
     // Apply configuration
     Configuration.g_dPaymentAmount = getConfig().getDouble("amountToGive", 0.25);
     Configuration.g_iPaymentInterval = getConfig().getInt("duration", 60);
+    Configuration.g_sBankAccount = getConfig().getString("bank", "");
 
     // Setup the economy
     if (!setupEconomy()) {
@@ -64,7 +66,17 @@ public class AutoMoneyPlugin extends JavaPlugin {
             getServer().getOnlinePlayers().forEach(player -> {
               //player.sendMessage("You have been paid " + Configuration.g_dPaymentAmount + " for being online.");
               //player.giveExp((int) Configuration.g_dPaymentAmount);
-              
+              // Check if a bank account is used.
+              if(Configuration.g_sBankAccount.isEmpty()) {
+                economy.depositPlayer(player, Configuration.g_dPaymentAmount);
+              } else {
+                var ecoReply = economy.bankWithdraw(Configuration.g_sBankAccount, Configuration.g_dPaymentAmount);
+                if(ecoReply.type == ResponseType.SUCCESS) {
+                  economy.depositPlayer(player, Configuration.g_dPaymentAmount);
+                } else {
+                  getLogger().severe("Failed to withdraw from bank account: " + ecoReply.errorMessage);
+                }
+              }
             });
           }
         }
