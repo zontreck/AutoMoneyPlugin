@@ -6,3 +6,6 @@ duration: 60
 
 # Bank account if applicable. Leave blank if undesired.
 bank: ""
+
+# Whether to print a log message in console every payout
+verbose: false

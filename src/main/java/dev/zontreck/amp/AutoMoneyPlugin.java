@@ -30,6 +30,7 @@ public class AutoMoneyPlugin extends JavaPlugin {
     Configuration.g_dPaymentAmount = getConfig().getDouble("amountToGive", 0.25);
     Configuration.g_iPaymentInterval = getConfig().getInt("duration", 60);
     Configuration.g_sBankAccount = getConfig().getString("bank", "");
+    Configuration.g_bVerbose = getConfig().getBoolean("verbose", false);
 
     // Setup the economy
     if (!setupEconomy()) {
@@ -62,6 +63,9 @@ public class AutoMoneyPlugin extends JavaPlugin {
         @Override
         public void run() {
           if(Configuration.PaymentEnabled()) {
+            if(Configuration.g_bVerbose) {
+              getLogger().info("Paying all online players " + Configuration.g_dPaymentAmount);
+            }
             // Pay all online players
             getServer().getOnlinePlayers().forEach(player -> {
               //player.sendMessage("You have been paid " + Configuration.g_dPaymentAmount + " for being online.");
