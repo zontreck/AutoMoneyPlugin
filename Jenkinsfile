@@ -14,15 +14,14 @@ pipeline {
                     sh '''
                     #!/bin/bash
 
-                    chmod +x gradlew
-                    ./gradlew clean build release
+                    mvn clean package
                     '''
                 }
             }
 
             post {
                 always {
-                    archiveArtifacts artifacts: 'build/libs/*.jar'
+                    archiveArtifacts artifacts: 'target/*.jar'
                 }
             }
         }

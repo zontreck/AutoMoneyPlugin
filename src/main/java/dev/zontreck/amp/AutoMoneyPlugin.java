@@ -1,7 +1,8 @@
 package dev.zontreck.amp;
 
-import io.papermc.lib.PaperLib;
+//import io.papermc.lib.PaperLib;
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 import net.milkbowl.vault.economy.EconomyResponse.ResponseType;
 
 import java.util.Timer;
@@ -21,7 +22,7 @@ public class AutoMoneyPlugin extends JavaPlugin {
 
   @Override
   public void onEnable() {
-    PaperLib.suggestPaper(this);
+    //PaperLib.suggestPaper(this);
 
     saveDefaultConfig();
     reloadConfig();
@@ -74,7 +75,7 @@ public class AutoMoneyPlugin extends JavaPlugin {
               if(Configuration.g_sBankAccount.isEmpty()) {
                 economy.depositPlayer(player, Configuration.g_dPaymentAmount);
               } else {
-                var ecoReply = economy.bankWithdraw(Configuration.g_sBankAccount, Configuration.g_dPaymentAmount);
+                EconomyResponse ecoReply = economy.bankWithdraw(Configuration.g_sBankAccount, Configuration.g_dPaymentAmount);
                 if(ecoReply.type == ResponseType.SUCCESS) {
                   economy.depositPlayer(player, Configuration.g_dPaymentAmount);
                 } else {
