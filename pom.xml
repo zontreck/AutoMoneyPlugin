@@ -12,7 +12,7 @@
 	<!-- Project information -->
 	<groupId>dev.zontreck.amp</groupId>
 	<artifactId>AutoMoneyPlugin</artifactId>
-	<version>1.0.032125.0055</version>
+	<version>1.0.032125.0058</version>
 	<name>AutoMoneyPlugin</name>
 	<url>https://zontreck.com</url>
 	<description>Gives money to online players automatically.</description>

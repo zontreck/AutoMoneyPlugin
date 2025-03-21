@@ -1,20 +1,8 @@
-main: ${PACKAGE}.${NAME}
-name: ${NAME}
-version: "${VERSION}"
+main: dev.zontreck.amp.AutoMoneyPlugin
+name: AutoMoneyPlugin
+version: "1.0.032125.0058"
 api-version: "1.21.1"
 author: zontreck
 description: A simple plugin providing automatic money to online players.
 commands:
-  ex:
-    description: Base command for EXAMPLE
-    usage: "For a list of commands, type /ex help"
-    aliases: example
 permissions:
-  example.test:
-    description: DESCRIPTION
-    default: true
-  example.*:
-    description: Grants all other permissions
-    default: false
-    children:
-      example.test: true
