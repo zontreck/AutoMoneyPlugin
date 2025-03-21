@@ -12,10 +12,10 @@
 	<!-- Project information -->
 	<groupId>dev.zontreck.amp</groupId>
 	<artifactId>AutoMoneyPlugin</artifactId>
-	<version>1.0.032125.0035</version>
+	<version>1.0.032125.0055</version>
 	<name>AutoMoneyPlugin</name>
-	<url>https://dev.bukkit.org/projects/vault</url>
-	<description>Vault is a Chat, Permissions &amp; Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.</description>
+	<url>https://zontreck.com</url>
+	<description>Gives money to online players automatically.</description>
 
 
 
@@ -92,10 +92,11 @@
 		<sourceDirectory>src/</sourceDirectory>
 		<resources>
 			<resource>
-				<directory>${project.basedir}</directory>
+				<directory>${project.basedir}/src/main/resources</directory>
 				<filtering>true</filtering>
 				<includes>
 					<include>plugin.yml</include>
+					<include>config.yml</include>
 				</includes>
 			</resource>
 		</resources>
@@ -108,34 +109,6 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<createDependencyReducedPom>false</createDependencyReducedPom>
-					<artifactSet>
-						<includes>
-							<include>net.milkbowl.vault:VaultAPI</include>
-							<include>org.bstats</include>
-						</includes>
-					</artifactSet>
-					<relocations>
-						<relocation>
-							<pattern>org.bstats</pattern>
-							<shadedPattern>net.milkbowl.vault.metrics</shadedPattern>
-						</relocation>
-					</relocations>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.eluder.coveralls</groupId>
