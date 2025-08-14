@@ -28,8 +28,8 @@ repositories {
         url = 'https://libraries.minecraft.net'
     }
     maven {
-        name = "milkbowl"
-        url = "https://github.com/milkbowl/github-releases"
+        name = "jitpack"
+        url = "https://jitpack.io"
     }
 
 
