@@ -1,27 +1,33 @@
 pipeline {
     agent any
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5'))
-    }
+
+
     stages {
-        stage('Build') {
+        stage("Build") {
             agent {
-                label 'linux'
+                label "linux"
             }
+
+            environment {
+                JAVA_HOME = "${tool 'jdk21'}"
+                PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
+            }
+
             steps {
-                echo 'Building..'
                 script {
                     sh '''
                     #!/bin/bash
-
-                    mvn clean package
+                    chmod +x gradlew
+                    ./gradlew build jar
                     '''
                 }
             }
 
             post {
                 always {
-                    archiveArtifacts artifacts: 'target/*.jar'
+                    archiveArtifacts artifacts: "build/libs/*.jar"
+                    archiveArtifacts artifacts: "**/build/libs/*.jar"
+                    cleanWs()
                 }
             }
         }

@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2024-2025 Aria's Creations
+ *
+ * Licensed under the GPL
+ */
+
 package dev.zontreck.amp;
 
 //import io.papermc.lib.PaperLib;
@@ -10,6 +16,7 @@ import java.util.Timer;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.papermc.lib.PaperLib;
 
 /**
  * AutoMoneyPlugin
@@ -22,7 +29,7 @@ public class AutoMoneyPlugin extends JavaPlugin {
 
   @Override
   public void onEnable() {
-    //PaperLib.suggestPaper(this);
+    PaperLib.suggestPaper(this);
 
     saveDefaultConfig();
     reloadConfig();
@@ -44,47 +51,49 @@ public class AutoMoneyPlugin extends JavaPlugin {
     reschedule();
   }
 
-	
-	/**
-	 * Sets up the vault economy.
-	 *
-	 * @return True if the economy was set up, false otherwise.
-	 */
-	private boolean setupEconomy() {
-		RegisteredServiceProvider<net.milkbowl.vault.economy.Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-		if (economyProvider != null) {
-			economy = economyProvider.getProvider();
-		}
-		
-		return economy != null;
-	}
+  /**
+   * Sets up the vault economy.
+   *
+   * @return True if the economy was set up, false otherwise.
+   */
+  private boolean setupEconomy() {
+    RegisteredServiceProvider<net.milkbowl.vault.economy.Economy> economyProvider = getServer().getServicesManager()
+        .getRegistration(net.milkbowl.vault.economy.Economy.class);
+    if (economyProvider != null) {
+      economy = economyProvider.getProvider();
+    }
+
+    return economy != null;
+  }
 
   public void reschedule() {
     task.scheduleAtFixedRate(new java.util.TimerTask() {
-        @Override
-        public void run() {
-          if(Configuration.PaymentEnabled()) {
-            if(Configuration.g_bVerbose) {
-              getLogger().info("Paying all online players " + Configuration.g_dPaymentAmount);
-            }
-            // Pay all online players
-            getServer().getOnlinePlayers().forEach(player -> {
-              //player.sendMessage("You have been paid " + Configuration.g_dPaymentAmount + " for being online.");
-              //player.giveExp((int) Configuration.g_dPaymentAmount);
-              // Check if a bank account is used.
-              if(Configuration.g_sBankAccount.isEmpty()) {
+      @Override
+      public void run() {
+        if (Configuration.PaymentEnabled()) {
+          if (Configuration.g_bVerbose) {
+            getLogger().info("Paying all online players " + Configuration.g_dPaymentAmount);
+          }
+          // Pay all online players
+          getServer().getOnlinePlayers().forEach(player -> {
+            // player.sendMessage("You have been paid " + Configuration.g_dPaymentAmount + "
+            // for being online.");
+            // player.giveExp((int) Configuration.g_dPaymentAmount);
+            // Check if a bank account is used.
+            if (Configuration.g_sBankAccount.isEmpty()) {
+              economy.depositPlayer(player, Configuration.g_dPaymentAmount);
+            } else {
+              EconomyResponse ecoReply = economy.bankWithdraw(Configuration.g_sBankAccount,
+                  Configuration.g_dPaymentAmount);
+              if (ecoReply.type == ResponseType.SUCCESS) {
                 economy.depositPlayer(player, Configuration.g_dPaymentAmount);
               } else {
-                EconomyResponse ecoReply = economy.bankWithdraw(Configuration.g_sBankAccount, Configuration.g_dPaymentAmount);
-                if(ecoReply.type == ResponseType.SUCCESS) {
-                  economy.depositPlayer(player, Configuration.g_dPaymentAmount);
-                } else {
-                  getLogger().severe("Failed to withdraw from bank account: " + ecoReply.errorMessage);
-                }
+                getLogger().severe("Failed to withdraw from bank account: " + ecoReply.errorMessage);
               }
-            });
-          }
+            }
+          });
         }
+      }
     }, 0L, Configuration.g_iPaymentInterval * 1000L);
   }
 

@@ -1,3 +1,9 @@
+/*
+ * Copyright (C) 2024-2025 Aria's Creations
+ *
+ * Licensed under the GPL
+ */
+
 package dev.zontreck.amp;
 
 public class Configuration {
@@ -5,7 +11,6 @@ public class Configuration {
     public static int g_iPaymentInterval = 0;
     public static String g_sBankAccount = "";
     public static boolean g_bVerbose = false;
-
 
     public static boolean PaymentEnabled() {
         return g_iPaymentInterval > 0;
