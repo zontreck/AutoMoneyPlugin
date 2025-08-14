@@ -17,3 +17,9 @@ To build the plugin, simply run the following
 I do have a Jenkins server set up, which automatically builds the plugin when changes are made.
 
 https://ci.zontreck.com/job/Projects/job/Java/job/AutoMoneyPlugin/
+
+# Dependency
+
+As Vault (by MilkBowl) has chosen to stick with Spigot, and not update for Paper's hard fork, we'll be using VaultUnlockedAPI from now on.
+
+1. Vault Unlocked

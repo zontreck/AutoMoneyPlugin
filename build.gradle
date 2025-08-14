@@ -10,7 +10,7 @@ plugins {
 
 
 group = 'dev.zontreck.amp'
-version = '1.0.081425.0939'
+version = '1.0.081425.0943'
 description = 'AutoMoneyPlugin'
 java.sourceCompatibility = JavaVersion.VERSION_21
 
@@ -28,8 +28,8 @@ repositories {
         url = 'https://libraries.minecraft.net'
     }
     maven {
-        name = "jitpack"
-        url = "https://jitpack.io"
+        name = "creatorfromhell"
+        url = "https://repo.codemc.io/repository/creatorfromhell/"
     }
 
 
@@ -41,7 +41,7 @@ dependencies {
 
     compileOnly "io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT"
     implementation 'io.papermc:paperlib:1.0.8'
-    api "com.github.MilkBowl:VaultAPI:${vaultVersion}"
+    api "net.milkbowl.vault:VaultUnlockedAPI:${vaultVersion}"
 }
 
 publishing {
